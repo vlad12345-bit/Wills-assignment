@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hot Beans Web — Join Our Team</title>
+<style>
+   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap');
+   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+   :root {
+     --bean:   #C8F04B;
+     --dark:   #0E0F0B;
+     --mid:    #1A1C16;
+     --card:   #1F2119;
+     --muted:  #6B7160;
+     --light:  #E8EDDA;
+     --white:  #F5F8EE;
+     --radius: 14px;
+     --transition: .35s cubic-bezier(.4,0,.2,1);
+   }
+   html { scroll-behavior: smooth; }
+   body {
+     font-family: 'DM Sans', 'Segoe UI', Calibri, Arial, sans-serif;
+     background: var(--dark);
+     color: var(--light);
+     line-height: 1.65;
+     overflow-x: hidden;
+   }
+   ::-webkit-scrollbar { width: 6px; }
+   ::-webkit-scrollbar-track { background: var(--dark); }
+   ::-webkit-scrollbar-thumb { background: var(--bean); border-radius: 99px; }
+   .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+   .tag {
+     display: inline-block;
+     font-family: 'DM Mono', 'Consolas', 'Courier New', monospace;
+     font-size: .72rem;
+     letter-spacing: .12em;
+     text-transform: uppercase;
+     background: rgba(200,240,75,.12);
+     color: var(--bean);
+     border: 1px solid rgba(200,240,75,.25);
+     padding: 4px 12px;
+     border-radius: 99px;
+   }
+   .section-title {
+     font-family: 'Bebas Neue', 'Arial Black', 'Impact', sans-serif;
+     font-size: clamp(2.8rem, 6vw, 5rem);
+     line-height: .95;
+     color: var(--white);
+     letter-spacing: .01em;
+   }
+   .section-title span { color: var(--bean); }
+   nav {
+     position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+     padding: 18px 0;
+     background: rgba(14,15,11,.82);
+     backdrop-filter: blur(18px);
+     border-bottom: 1px solid rgba(200,240,75,.08);
+   }
+   nav .inner {
+     display: flex; align-items: center; justify-content: space-between;
+     max-width: 1180px; margin: 0 auto; padding: 0 24px;
+   }
+   .logo {
+     font-family: 'Bebas Neue', 'Arial Black', 'Impact', sans-serif;
+     font-size: 1.6rem; letter-spacing: .06em;
+     color: var(--white); text-decoration: none;
+   }
+   .logo span { color: var(--bean); }
+   .nav-links { display: flex; gap: 36px; list-style: none; }
+   .nav-links a {
+     font-size: .88rem; font-weight: 500; color: var(--muted);
+     text-decoration: none; transition: color var(--transition); letter-spacing: .03em;
+   }
+   .nav-links a:hover { color: var(--bean); }
+   .btn-nav {
+     background: var(--bean); color: var(--dark); font-weight: 700;
+     font-size: .85rem; padding: 10px 22px; border-radius: 99px;
+     text-decoration: none; letter-spacing: .04em; transition: var(--transition);
+   }
+   .btn-nav:hover { background: var(--white); }
+   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+   .hamburger span { display: block; width: 26px; height: 2px; background: var(--white); border-radius: 99px; }
+   #hero {
+     min-height: 100vh; display: flex; align-items: center;
+     padding-top: 90px; position: relative; overflow: hidden;
+   }
+   #hero::before {
+     content: ''; position: absolute; inset: 0;
+     background-image: linear-gradient(rgba(200,240,75,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(200,240,75,.04) 1px, transparent 1px);
+     background-size: 60px 60px; pointer-events: none;
+   }
+   #hero::after {
+     content: ''; position: absolute; width: 700px; height: 700px;
+     border-radius: 50%; background: radial-gradient(circle, rgba(200,240,75,.12) 0%, transparent 70%);
+     top: -200px; right: -200px; pointer-events: none;
+   }
+   .hero-content { position: relative; z-index: 1; max-width: 780px; }
+   .hero-eyebrow { margin-bottom: 22px; }
+   .hero-title {
+     font-family: 'Bebas Neue', 'Arial Black', 'Impact', sans-serif;
+     font-size: clamp(4rem, 10vw, 9rem); line-height: .9;
+     color: var(--white); letter-spacing: .01em; margin-bottom: 28px;
+   }
+   .hero-title .accent { color: var(--bean); }
+   .hero-sub { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--muted); max-width: 540px; margin-bottom: 40px; line-height: 1.7; }
+   .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+   .btn-primary {
+     background: var(--bean); color: var(--dark); font-weight: 700; font-size: 1rem;
+     padding: 16px 36px; border-radius: 99px; text-decoration: none;
+     letter-spacing: .04em; transition: var(--transition); border: none; cursor: pointer;
+   }
+   .btn-primary:hover { background: var(--white); transform: translateY(-2px); }
+   .btn-outline {
+     background: transparent; color: var(--light); font-weight: 500; font-size: 1rem;
+     padding: 16px 36px; border-radius: 99px; text-decoration: none;
+     border: 1px solid rgba(232,237,218,.2); transition: var(--transition);
+   }
+   .btn-outline:hover { border-color: var(--bean); color: var(--bean); }
+   .hero-stats { display: flex; gap: 48px; margin-top: 72px; padding-top: 40px; border-top: 1px solid rgba(232,237,218,.08); }
+   .stat-num { font-family: 'Bebas Neue', 'Arial Black', 'Impact', sans-serif; font-size: 3rem; color: var(--bean); line-height: 1; }
+   .stat-label { font-size: .82rem; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; }
+   section { padding: 100px 0; }
+   .section-header { margin-bottom: 60px; }
+   .section-header .tag { margin-bottom: 18px; }
+   #about { background: var(--mid); }
+   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+   .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
+   .about-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+   .pill {
+     background: rgba(200,240,75,.08); border: 1px solid rgba(200,240,75,.15);
+     color: var(--bean); font-size: .8rem;
+     font-family: 'DM Mono', 'Consolas', 'Courier New', monospace;
+     padding: 6px 14px; border-radius: 99px;
+   }
+   .about-visual {
+     background: var(--card); border-radius: var(--radius); padding: 40px;
+     border: 1px solid rgba(232,237,218,.06);
+   }
+   .about-visual h3 { font-family: 'Bebas Neue', 'Arial Black', 'Impact', sans-serif; font-size: 2rem; color: var(--white); margin-bottom: 20px; }
+   .value-list { list-style: none; }
+   .value-list li {
+     display: flex; gap: 14px; align-items: flex-start;
+     padding: 14px 0; border-bottom: 1px solid rgba(232,237,218,.06);
+     color: var(--muted); font-size: .92rem;
+   }
+   .value-list li:last-child { border-bottom: none; }
+   .value-list .icon {
+     width: 32px; height: 32px; border-radius: 8px;
+     background: rgba(200,240,75,.12);
+     display: flex; align-items: center; justify-content: center;
+     flex-shrink: 0; font-size: 1rem;
+   }
+   .value-list strong { display: block; color: var(--white); font-size: .88rem; margin-bottom: 2px; }
+   #team { background: var(--dark); }
+   .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+   .team-card {
+     background: var(--card); border: 1px solid rgba(232,237,218,.06);
+     border-radius: var(--radius); padding: 32px;
+     transition: var(--transition); position: relative; overflow: hidden;
+   }
+   .team-card::before {
+     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+     background: var(--bean); transform: scaleX(0); transform-origin: left; transition: var(--transition);
+   }
+   .team-card:hover { border-color: rgba(200,240,75,.2); transform: translateY(-4px); }
+   .team-card:hover::before { transform: scaleX(1); }
+   .team-avatar {
+     width: 64px; height: 64px; border-radius: 50%;
+     background: linear-gradient(135deg, var(--bean), #4af0a0);
+     display: flex; align-items: center; justify-content: center;
+     font-family: 'Bebas Neue', 'Arial Black', 'Impact', sans-serif;
+     font-size: 1.6rem; color: var(--dark); margin-bottom: 20px;
+   }
+   .team-name { font-weight: 700; font-size: 1.1rem; color: var(--white); margin-bottom: 4px; }
+   .team-role { font-size: .8rem; font-family: 'DM Mono', 'Consolas', 'Courier New', monospace; color: var(--bean); letter-spacing: .08em; margin-bottom: 14px; }
+   .team-bio { color: var(--muted); font-size: .88rem; line-height: 1.7; margin-bottom: 20px; }
+   .team-skills { display: flex; flex-wrap: wrap; gap: 8px; }
+   .skill-badge {
+     font-size: .72rem; font-family: 'DM Mono', 'Consolas', 'Courier New', monospace;
+     background: rgba(232,237,218,.06); color: var(--light);
+     padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(232,237,218,.08);
+   }
+   #jobs { background: var(--mid); }
+   .jobs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+   .job-card {
+     background: var(--card); border: 1px solid rgba(232,237,218,.06);
+     border-radius: var(--radius); padding: 36px; transition: var(--transition);
+   }
+   .job-card:hover { border-color: rgba(200,240,75,.25); }
+   .job-title { font-family: 'Bebas Neue', 'Arial Black', 'Impact', sans-serif; font-size: 1.9rem; color: var(--white); margin: 14px 0 8px; }
+   .job-type { font-size: .75rem; font-family: 'DM Mono', 'Consolas', 'Courier New', monospace; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
+   .job-desc { color: var(--muted); font-size: .9rem; line-height: 1.75; margin-bottom: 24px; }
+   .job-reqs h4 { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--bean); font-family: 'DM Mono', 'Consolas', 'Courier New', monospace; margin-bottom: 12px; }
+   .job-reqs ul { list-style: none; }
+   .job-reqs li {
+     color: var(--muted); font-size: .88rem; padding: 6px 0;
+     border-bottom: 1px solid rgba(232,237,218,.05);
+     display: flex; gap: 10px; align-items: center;
+   }
+   .job-reqs li::before { content: '→'; color: var(--bean); font-size: .8rem; flex-shrink: 0; }
+   .job-reqs li:last-child { border-bottom: none; }
+   .job-footer { margin-top: 28px; display: flex; justify-content: flex-end; }
+   #courses { background: var(--dark); }
+   .courses-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+   .course-card {
+     background: var(--card); border: 1px solid rgba(232,237,218,.06);
+     border-radius: var(--radius); padding: 28px; transition: var(--transition);
+     display: flex; flex-direction: column; gap: 12px;
+   }
+   .course-card:hover { border-color: rgba(200,240,75,.2); transform: translateY(-3px); }
+   .course-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(200,240,75,.1); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+   .course-name { font-weight: 700; color: var(--white); font-size: 1rem; }
+   .course-provider { font-size: .78rem; font-family: 'DM Mono', 'Consolas', 'Courier New', monospace; color: var(--bean); }
+   .course-desc { color: var(--muted); font-size: .85rem; line-height: 1.65; flex: 1; }
+   .course-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+   .course-duration { font-size: .75rem; font-family: 'DM Mono', 'Consolas', 'Courier New', monospace; color: var(--muted); }
+   .course-link { font-size: .82rem; font-weight: 600; color: var(--bean); text-decoration: none; letter-spacing: .03em; transition: color var(--transition); }
+   .course-link:hover { color: var(--white); }
+   #apply { background: var(--mid); }
+   .apply-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+   .apply-info { position: sticky; top: 100px; }
+   .apply-info p { color: var(--muted); line-height: 1.8; margin-top: 18px; }
+   .apply-checklist { list-style: none; margin-top: 32px; }
+   .apply-checklist li { display: flex; gap: 12px; align-items: center; color: var(--muted); font-size: .9rem; padding: 10px 0; border-bottom: 1px solid rgba(232,237,218,.05); }
+   .apply-checklist li:last-child { border-bottom: none; }
+   .check-icon { width: 26px; height: 26px; border-radius: 50%; background: rgba(200,240,75,.12); border: 1px solid rgba(200,240,75,.25); display: flex; align-items: center; justify-content: center; color: var(--bean); font-size: .75rem; flex-shrink: 0; }
+   .form-card { background: var(--card); border: 1px solid rgba(232,237,218,.06); border-radius: var(--radius); padding: 48px; }
+   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+   .form-group { margin-bottom: 22px; }
+   label { display: block; font-size: .8rem; font-family: 'DM Mono', 'Consolas', 'Courier New', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+   input, select, textarea {
+     width: 100%; background: rgba(14,15,11,.7); border: 1px solid rgba(232,237,218,.1);
+     border-radius: 10px; color: var(--white);
+     font-family: 'DM Sans', 'Segoe UI', Calibri, Arial, sans-serif;
+     font-size: .95rem; padding: 14px 18px; outline: none;
+     transition: border-color var(--transition), box-shadow var(--transition); -webkit-appearance: none;
+   }
+   input:focus, select:focus, textarea:focus { border-color: var(--bean); box-shadow: 0 0 0 3px rgba(200,240,75,.12); }
+   textarea { resize: vertical; min-height: 120px; }
+   select option { background: var(--card); }
+   .form-note { font-size: .8rem; color: var(--muted); margin-top: 6px; }
+   .checkbox-label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: var(--muted); font-size: .88rem; }
+   .checkbox-label input[type="checkbox"] { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; cursor: pointer; accent-color: var(--bean); }
+   .btn-submit {
+     width: 100%; background: var(--bean); color: var(--dark);
+     font-family: 'DM Sans', 'Segoe UI', Calibri, Arial, sans-serif;
+     font-weight: 700; font-size: 1rem; padding: 18px; border: none;
+     border-radius: 99px; cursor: pointer; letter-spacing: .04em; transition: var(--transition);
+   }
+   .btn-submit:hover { background: var(--white); transform: translateY(-2px); }
+   .success-msg { display: none; background: rgba(200,240,75,.08); border: 1px solid rgba(200,240,75,.25); border-radius: var(--radius); padding: 28px; text-align: center; color: var(--bean); font-weight: 500; }
+   footer { background: var(--dark); border-top: 1px solid rgba(232,237,218,.06); padding: 60px 0 36px; }
+   .footer-inner { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
+   .footer-brand .logo { font-size: 1.8rem; display: block; margin-bottom: 14px; }
+   .footer-brand p { color: var(--muted); font-size: .88rem; line-height: 1.75; max-width: 300px; }
+   .footer-col h4 { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--bean); font-family: 'DM Mono', 'Consolas', 'Courier New', monospace; margin-bottom: 20px; }
+   .footer-col ul { list-style: none; }
+   .footer-col li { margin-bottom: 10px; }
+   .footer-col a { color: var(--muted); font-size: .88rem; text-decoration: none; transition: color var(--transition); }
+   .footer-col a:hover { color: var(--white); }
+   .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(232,237,218,.06); color: var(--muted); font-size: .8rem; }
+   .fade-in { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+   .fade-in.visible { opacity: 1; transform: translateY(0); }
+   .fade-in:nth-child(1) { transition-delay: .05s; }
+   .fade-in:nth-child(2) { transition-delay: .12s; }
+   .fade-in:nth-child(3) { transition-delay: .19s; }
+   .fade-in:nth-child(4) { transition-delay: .26s; }
+   .fade-in:nth-child(5) { transition-delay: .33s; }
+   .fade-in:nth-child(6) { transition-delay: .40s; }
+   @media (max-width: 900px) {
+     .about-grid, .apply-grid { grid-template-columns: 1fr; gap: 48px; }
+     .jobs-grid { grid-template-columns: 1fr; }
+     .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+     .apply-info { position: static; }
+     .hero-stats { gap: 32px; }
+   }
+   @media (max-width: 640px) {
+     .nav-links, .btn-nav { display: none; }
+     .hamburger { display: flex; }
+     .hero-title { font-size: 3.5rem; }
+     .hero-stats { flex-wrap: wrap; gap: 24px; }
+     .form-row { grid-template-columns: 1fr; }
+     .footer-inner { grid-template-columns: 1fr; }
+     .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+     .form-card { padding: 28px; }
+   }
+   .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--dark); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+   .mobile-menu.open { display: flex; }
+   .mobile-menu a { font-family: 'Bebas Neue', 'Arial Black', 'Impact', sans-serif; font-size: 2.4rem; color: var(--white); text-decoration: none; letter-spacing: .04em; transition: color var(--transition); }
+   .mobile-menu a:hover { color: var(--bean); }
+   .mobile-close { position: absolute; top: 24px; right: 28px; background: none; border: none; color: var(--white); font-size: 2rem; cursor: pointer; }
+   .mobile-close:hover { color: var(--bean); }
+</style>
+</head>
+<body>
+<div class="mobile-menu" id="mobileMenu">
+<button class="mobile-close" onclick="toggleMenu()">✕</button>
+<a href="#about" onclick="toggleMenu()">About</a>
+<a href="#team" onclick="toggleMenu()">Meet the Team</a>
+<a href="#jobs" onclick="toggleMenu()">Roles</a>
+<a href="#courses" onclick="toggleMenu()">Courses</a>
+<a href="#apply" onclick="toggleMenu()">Apply</a>
+</div>
+<nav>
+<div class="inner">
+<a class="logo" href="#hero"><span>Hot</span> Beans Web</a>
+<ul class="nav-links">
+<li><a href="#about">About</a></li>
+<li><a href="#team">Team</a></li>
+<li><a href="#jobs">Roles</a></li>
+<li><a href="#courses">Courses</a></li>
+<li><a href="#apply">Apply</a></li>
+</ul>
+<a href="#apply" class="btn-nav">Apply Now</a>
+<div class="hamburger" onclick="toggleMenu()">
+<span></span><span></span><span></span>
+</div>
+</div>
+</nav>
+<section id="hero">
+<div class="container">
+<div class="hero-content">
+<div class="hero-eyebrow"><span class="tag">🌱 Now Hiring — Junior Developers</span></div>
+<h1 class="hero-title">Build the <span class="accent">Web.</span><br>Grow Your<br>Career.</h1>
+<p class="hero-sub">Hot Beans Web is a passionate, full-service web development agency looking for talented junior developers to join our growing team. If you've got the skills and the drive, we want to hear from you.</p>
+<div class="hero-cta">
+<a href="#jobs" class="btn-primary">See Open Roles</a>
+<a href="#about" class="btn-outline">Learn About Us</a>
+</div>
+<div class="hero-stats">
+<div><div class="stat-num">12+</div><div class="stat-label">Years in Business</div></div>
+<div><div class="stat-num">80+</div><div class="stat-label">Projects Delivered</div></div>
+<div><div class="stat-num">100%</div><div class="stat-label">Remote Friendly</div></div>
+<div><div class="stat-num">4</div><div class="stat-label">Open Positions</div></div>
+</div>
+</div>
+</div>
+</section>
+<section id="about">
+<div class="container">
+<div class="about-grid">
+<div class="about-text">
+<div class="section-header">
+<span class="tag">Our Story</span>
+<h2 class="section-title" style="margin-top:18px;">Who Are<br><span>Hot Beans?</span></h2>
+</div>
+<p>Founded in 2012, Hot Beans Web is a leading web development agency based in the UK. We partner with clients across a wide range of industries — from startups to established enterprises — to design, build, and optimise digital products that make a real impact.</p>
+<p>We're a team of developers, designers, and strategists who genuinely love what we do. Our culture is collaborative, supportive, and always curious. We invest in our people — especially those who are just starting out.</p>
+<p>We believe the best web experiences come from diverse teams with fresh perspectives. That's why we actively recruit trainee and junior developers who bring enthusiasm, new ideas, and a hunger to grow.</p>
+<div class="about-pills">
+<span class="pill">HTML / CSS</span><span class="pill">JavaScript</span><span class="pill">React</span>
+<span class="pill">Node.js</span><span class="pill">UI/UX Design</span><span class="pill">Agile / Scrum</span>
+<span class="pill">AWS</span><span class="pill">Git</span>
+</div>
+</div>
+<div class="about-visual">
+<h3>Our Core Values</h3>
+<ul class="value-list">
+<li><div class="icon">🤝</div><div><strong>Collaboration First</strong>We work as one team. Everyone's voice counts regardless of experience level.</div></li>
+<li><div class="icon">📈</div><div><strong>Continuous Growth</strong>We encourage learning, curiosity, and personal development every day.</div></li>
+<li><div class="icon">✨</div><div><strong>Quality Over Quantity</strong>We take pride in crafting experiences that are fast, accessible, and beautiful.</div></li>
+<li><div class="icon">🌍</div><div><strong>Inclusivity</strong>We foster a welcoming environment for people from all backgrounds.</div></li>
+<li><div class="icon">⚡</div><div><strong>Agility</strong>We adapt, iterate, and improve — both our products and ourselves.</div></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="team">
+<div class="container">
+<div class="section-header">
+<span class="tag">Meet the Team</span>
+<h2 class="section-title" style="margin-top:18px;">Trainee Dev<br><span>Profiles</span></h2>
+<p style="color:var(--muted);max-width:520px;margin-top:16px;line-height:1.75;">Wondering what it's like to be a junior developer here? Hear from our current trainees about their journeys, skills, and why they chose Hot Beans Web.</p>
+</div>
+<div class="team-grid">
+<div class="team-card fade-in">
+<div class="team-avatar">JR</div>
+<div class="team-name">Jamie Reid</div>
+<div class="team-role">Junior Front-End Developer</div>
+<p class="team-bio">After completing a Level 3 IT qualification and a web development bootcamp, I joined Hot Beans as a trainee. In just 8 months, I've shipped 3 live client sites and learned more than I thought possible. The mentorship here is genuinely exceptional.</p>
+<div class="team-skills"><span class="skill-badge">HTML5</span><span class="skill-badge">CSS3</span><span class="skill-badge">JavaScript</span><span class="skill-badge">Figma</span></div>
+</div>
+<div class="team-card fade-in">
+<div class="team-avatar" style="background:linear-gradient(135deg,#a78bfa,#60a5fa);">SP</div>
+<div class="team-name">Sofia Patel</div>
+<div class="team-role">Junior Full-Stack Developer</div>
+<p class="team-bio">I came from a computer science A-level background with no professional experience. Hot Beans gave me the structure and real projects I needed to develop fast. The team is welcoming, and no question ever feels too basic to ask.</p>
+<div class="team-skills"><span class="skill-badge">React</span><span class="skill-badge">Node.js</span><span class="skill-badge">MongoDB</span><span class="skill-badge">Git</span></div>
+</div>
+<div class="team-card fade-in">
+<div class="team-avatar" style="background:linear-gradient(135deg,#f97316,#facc15);">TC</div>
+<div class="team-name">Tyler Chen</div>
+<div class="team-role">Trainee Back-End Developer</div>
+<p class="team-bio">I completed a FreeCodeCamp full-stack certification online before applying. Hot Beans saw my portfolio, took a chance on me, and I haven't looked back. The code reviews alone have accelerated my skills dramatically.</p>
+<div class="team-skills"><span class="skill-badge">Python</span><span class="skill-badge">SQL</span><span class="skill-badge">REST APIs</span><span class="skill-badge">Linux</span></div>
+</div>
+<div class="team-card fade-in">
+<div class="team-avatar" style="background:linear-gradient(135deg,#ec4899,#f43f5e);">AO</div>
+<div class="team-name">Amara Osei</div>
+<div class="team-role">Junior UI/UX + Front-End Dev</div>
+<p class="team-bio">I transitioned from a graphic design background into web development via an online bootcamp. Hot Beans valued my design eye and helped me bridge it with code. I now lead the visual quality reviews on client projects.</p>
+<div class="team-skills"><span class="skill-badge">CSS/SASS</span><span class="skill-badge">Figma</span><span class="skill-badge">Vue.js</span><span class="skill-badge">Accessibility</span></div>
+</div>
+</div>
+</div>
+</section>
+<section id="jobs">
+<div class="container">
+<div class="section-header">
+<span class="tag">Open Roles</span>
+<h2 class="section-title" style="margin-top:18px;">Current<br><span>Vacancies</span></h2>
+<p style="color:var(--muted);max-width:520px;margin-top:16px;line-height:1.75;">We're growing fast and actively recruiting for the roles below. All positions welcome candidates who have recently completed relevant qualifications, even if you have limited professional experience.</p>
+</div>
+<div class="jobs-grid">
+<div class="job-card fade-in">
+<span class="tag">Front-End</span>
+<h3 class="job-title">Junior Front-End Developer</h3>
+<p class="job-type">Full-Time · Hybrid · Cheltenham, UK</p>
+<p class="job-desc">Join our front-end team to build responsive, accessible, and visually engaging user interfaces for our growing client portfolio. You'll work closely with senior developers and designers in an agile environment, contributing to real production code from day one.</p>
+<div class="job-reqs">
+<h4>Required Qualifications & Skills</h4>
+<ul>
+<li>Level 3 qualification in IT, Computing, or related subject (or equivalent)</li>
+<li>Solid understanding of HTML5, CSS3, and vanilla JavaScript</li>
+<li>Experience with responsive / mobile-first design principles</li>
+<li>Familiarity with version control (Git / GitHub)</li>
+<li>Basic knowledge of a JavaScript framework (React, Vue) is a plus</li>
+<li>Portfolio demonstrating personal or coursework projects</li>
+<li>Good communication skills and a collaborative mindset</li>
+</ul>
+</div>
+<div class="job-footer"><a href="#apply" class="btn-primary" style="font-size:.88rem;padding:12px 26px;">Apply for This Role</a></div>
+</div>
+<div class="job-card fade-in">
+<span class="tag">Full-Stack</span>
+<h3 class="job-title">Trainee Full-Stack Developer</h3>
+<p class="job-type">Full-Time · Remote-Friendly · UK-based</p>
+<p class="job-desc">We're looking for a motivated trainee developer ready to work across both front-end and back-end technologies. You'll be mentored throughout your first year with structured development plans, code reviews, and access to learning resources.</p>
+<div class="job-reqs">
+<h4>Required Qualifications & Skills</h4>
+<ul>
+<li>Level 3 IT / Computer Science qualification or bootcamp certificate</li>
+<li>Knowledge of HTML, CSS, and JavaScript fundamentals</li>
+<li>Introductory knowledge of a back-end language (Node.js, Python, or PHP)</li>
+<li>Understanding of databases (SQL or NoSQL basics)</li>
+<li>Awareness of RESTful API concepts</li>
+<li>Ability to work in a team and take on feedback constructively</li>
+</ul>
+</div>
+<div class="job-footer"><a href="#apply" class="btn-primary" style="font-size:.88rem;padding:12px 26px;">Apply for This Role</a></div>
+</div>
+<div class="job-card fade-in">
+<span class="tag">Back-End</span>
+<h3 class="job-title">Junior Back-End Developer</h3>
+<p class="job-type">Full-Time · Hybrid · Cheltenham, UK</p>
+<p class="job-desc">Help us build the server-side systems and APIs that power our clients' digital products. You'll work with databases, server environments, and APIs, supported by experienced senior engineers who prioritise knowledge-sharing.</p>
+<div class="job-reqs">
+<h4>Required Qualifications & Skills</h4>
+<ul>
+<li>Degree, Higher National, or Level 3 qualification in Computing / IT</li>
+<li>Working knowledge of Python, Node.js, or PHP</li>
+<li>Experience with relational databases and SQL queries</li>
+<li>Understanding of server concepts, HTTP, and web security basics</li>
+<li>Familiarity with Linux command line environments</li>
+<li>Experience with Git version control</li>
+</ul>
+</div>
+<div class="job-footer"><a href="#apply" class="btn-primary" style="font-size:.88rem;padding:12px 26px;">Apply for This Role</a></div>
+</div>
+<div class="job-card fade-in">
+<span class="tag">UI / UX</span>
+<h3 class="job-title">Junior UI/UX Developer</h3>
+<p class="job-type">Full-Time · Hybrid · Cheltenham, UK</p>
+<p class="job-desc">A hybrid role for someone who bridges design and code. You'll conduct user research, produce wireframes and prototypes in Figma, and implement designs with HTML/CSS. Ideal for candidates with both creative and technical ability.</p>
+<div class="job-reqs">
+<h4>Required Qualifications & Skills</h4>
+<ul>
+<li>Level 3 qualification in IT, Media, Design, or Computing</li>
+<li>Strong portfolio showing web design and/or front-end work</li>
+<li>Proficiency with Figma, Adobe XD, or similar design tools</li>
+<li>Good understanding of UX principles and accessibility (WCAG)</li>
+<li>HTML and CSS skills to implement own designs</li>
+<li>Understanding of user testing methods and how to act on feedback</li>
+</ul>
+</div>
+<div class="job-footer"><a href="#apply" class="btn-primary" style="font-size:.88rem;padding:12px 26px;">Apply for This Role</a></div>
+</div>
+</div>
+</div>
+</section>
+<section id="courses">
+<div class="container">
+<div class="section-header">
+<span class="tag">Get Qualified</span>
+<h2 class="section-title" style="margin-top:18px;">Recommended<br><span>Courses</span></h2>
+<p style="color:var(--muted);max-width:540px;margin-top:16px;line-height:1.75;">Not quite ready to apply? Here are some of the best courses and qualifications we recommend for aspiring web developers. Complete one of these and you'll be in a strong position to join our team.</p>
+</div>
+<div class="courses-grid">
+<div class="course-card fade-in">
+<div class="course-icon">🎓</div>
+<div class="course-name">BTEC Level 3 IT — Website Development</div>
+<div class="course-provider">Pearson / Colleges UK</div>
+<p class="course-desc">A nationally recognised Level 3 qualification covering web design, coding, and development principles. Widely accepted by employers as evidence of foundational competence.</p>
+<div class="course-meta"><span class="course-duration">1–2 Years</span><a href="https://qualifications.pearson.com" class="course-link" target="_blank" rel="noopener">Visit →</a></div>
+</div>
+<div class="course-card fade-in">
+<div class="course-icon">💻</div>
+<div class="course-name">Responsive Web Design Certification</div>
+<div class="course-provider">freeCodeCamp.org</div>
+<p class="course-desc">A free, comprehensive course covering HTML and CSS including flexbox, grid, and responsive design. A great starting point for complete beginners with a verifiable certificate on completion.</p>
+<div class="course-meta"><span class="course-duration">~300 Hours</span><a href="https://www.freecodecamp.org" class="course-link" target="_blank" rel="noopener">Visit →</a></div>
+</div>
+<div class="course-card fade-in">
+<div class="course-icon">⚛️</div>
+<div class="course-name">JavaScript Algorithms & Data Structures</div>
+<div class="course-provider">freeCodeCamp.org</div>
+<p class="course-desc">Deepen your JavaScript skills with ES6, OOP, functional programming, and basic algorithms. Essential for any developer role at Hot Beans Web.</p>
+<div class="course-meta"><span class="course-duration">~300 Hours</span><a href="https://www.freecodecamp.org" class="course-link" target="_blank" rel="noopener">Visit →</a></div>
+</div>
+<div class="course-card fade-in">
+<div class="course-icon">🚀</div>
+<div class="course-name">The Web Developer Bootcamp 2025</div>
+<div class="course-provider">Udemy — Colt Steele</div>
+<p class="course-desc">A highly rated bootcamp-style course covering HTML, CSS, JavaScript, Node.js, Express, and MongoDB. Ideal for those wanting a comprehensive self-paced learning path.</p>
+<div class="course-meta"><span class="course-duration">~63 Hours</span><a href="https://www.udemy.com" class="course-link" target="_blank" rel="noopener">Visit →</a></div>
+</div>
+<div class="course-card fade-in">
+<div class="course-icon">🎯</div>
+<div class="course-name">CS50's Web Programming with Python & JS</div>
+<div class="course-provider">Harvard / edX</div>
+<p class="course-desc">A rigorous, university-level free course from Harvard covering Django, React, APIs, scalability and more. Certificate available. Highly regarded by hiring managers in tech.</p>
+<div class="course-meta"><span class="course-duration">Self-Paced</span><a href="https://www.edx.org" class="course-link" target="_blank" rel="noopener">Visit →</a></div>
+</div>
+<div class="course-card fade-in">
+<div class="course-icon">🏅</div>
+<div class="course-name">Google UX Design Certificate</div>
+<div class="course-provider">Google / Coursera</div>
+<p class="course-desc">A professional certificate from Google covering UX research, wireframing, prototyping, and testing — perfect if you're aiming for our UI/UX Developer role.</p>
+<div class="course-meta"><span class="course-duration">~6 Months</span><a href="https://www.coursera.org" class="course-link" target="_blank" rel="noopener">Visit →</a></div>
+</div>
+</div>
+</div>
+</section>
+<section id="apply">
+<div class="container">
+<div class="apply-grid">
+<div class="apply-info">
+<span class="tag">Apply Today</span>
+<h2 class="section-title" style="margin-top:18px;">Ready to<br><span>Join Us?</span></h2>
+<p>Fill in the form to start your application. We review every submission personally. You'll hear back from us within 5 working days regardless of the outcome.</p>
+<ul class="apply-checklist">
+<li><div class="check-icon">✓</div><span>Open to candidates with qualifications but no professional experience</span></li>
+<li><div class="check-icon">✓</div><span>Structured mentorship programme included for all junior hires</span></li>
+<li><div class="check-icon">✓</div><span>Competitive starting salary with regular performance reviews</span></li>
+<li><div class="check-icon">✓</div><span>Access to paid training budget and professional development days</span></li>
+<li><div class="check-icon">✓</div><span>Hybrid and remote working options available</span></li>
+<li><div class="check-icon">✓</div><span>Inclusive, supportive team culture from day one</span></li>
+</ul>
+</div>
+<div>
+<div class="form-card">
+<div id="successMsg" class="success-msg">
+<p style="font-size:1.4rem;margin-bottom:8px;">🎉 Application Received!</p>
+<p style="color:var(--light);font-size:.92rem;">Thanks for applying to Hot Beans Web. We'll be in touch within 5 working days.</p>
+</div>
+<div id="applicationForm">
+<p style="font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bean);margin-bottom:20px;">01 — Personal Details</p>
+<div class="form-row">
+<div class="form-group"><label for="firstName">First Name *</label><input type="text" id="firstName" placeholder="e.g. Jamie" /></div>
+<div class="form-group"><label for="lastName">Last Name *</label><input type="text" id="lastName" placeholder="e.g. Reid" /></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" placeholder="you@example.com" /></div>
+<div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" placeholder="+44 7700 000000" /></div>
+</div>
+<p style="font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bean);margin-bottom:20px;margin-top:8px;">02 — Role & Experience</p>
+<div class="form-group">
+<label for="role">Applying For *</label>
+<select id="role">
+<option value="" disabled selected>Select a role...</option>
+<option>Junior Front-End Developer</option>
+<option>Trainee Full-Stack Developer</option>
+<option>Junior Back-End Developer</option>
+<option>Junior UI/UX Developer</option>
+</select>
+</div>
+<div class="form-group">
+<label for="qualification">Highest Relevant Qualification *</label>
+<select id="qualification">
+<option value="" disabled selected>Select qualification...</option>
+<option>BTEC Level 3 IT / Computing</option>
+<option>A-Level Computer Science</option>
+<option>Online Bootcamp Certificate</option>
+<option>HNC / HND in Computing</option>
+<option>Bachelor's Degree in Computing or related</option>
+<option>Other relevant qualification</option>
+</select>
+</div>
+<div class="form-group">
+<label for="experience">Years of Coding Experience *</label>
+<select id="experience">
+<option value="" disabled selected>Select range...</option>
+<option>Less than 1 year</option>
+<option>1–2 years</option>
+<option>2–3 years</option>
+<option>3+ years</option>
+</select>
+</div>
+<div class="form-group">
+<label for="portfolio">Portfolio / GitHub URL</label>
+<input type="url" id="portfolio" placeholder="https://github.com/yourname" />
+<p class="form-note">Having a portfolio significantly strengthens your application.</p>
+</div>
+<p style="font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bean);margin-bottom:20px;margin-top:8px;">03 — Your Skills</p>
+<div class="form-group">
+<label for="skills">List Your Key Technical Skills *</label>
+<input type="text" id="skills" placeholder="e.g. HTML, CSS, JavaScript, React, Git…" />
+<p class="form-note">Separate each skill with a comma.</p>
+</div>
+<div class="form-group">
+<label for="coverLetter">Why Do You Want to Join Hot Beans Web? *</label>
+<textarea id="coverLetter" placeholder="Tell us about yourself, your motivation, and what you'd bring to the team. (100–400 words)"></textarea>
+</div>
+<div class="form-group">
+<label for="heardAbout">How Did You Hear About Us?</label>
+<select id="heardAbout">
+<option value="" disabled selected>Select an option...</option>
+<option>School / College</option>
+<option>LinkedIn</option>
+<option>Indeed / Jobs board</option>
+<option>Google Search</option>
+<option>Friend / Referral</option>
+<option>Social Media</option>
+<option>Other</option>
+</select>
+</div>
+<div class="form-group">
+<label class="checkbox-label">
+<input type="checkbox" id="gdpr" />
+<span>I consent to Hot Beans Web storing my personal data for the purpose of this application in accordance with GDPR and the company's privacy policy. *</span>
+</label>
+</div>
+<div class="form-submit">
+<button type="button" class="btn-submit" onclick="submitForm()">Submit Application →</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer>
+<div class="container">
+<div class="footer-inner">
+<div class="footer-brand">
+<a class="logo" href="#hero"><span>Hot</span> Beans Web</a>
+<p>A passionate UK-based web development agency. We build digital experiences that matter — and we're growing our team to do even more.</p>
+</div>
+<div class="footer-col">
+<h4>Navigation</h4>
+<ul>
+<li><a href="#about">About Us</a></li>
+<li><a href="#team">Meet the Team</a></li>
+<li><a href="#jobs">Open Roles</a></li>
+<li><a href="#courses">Recommended Courses</a></li>
+<li><a href="#apply">Apply Now</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Contact</h4>
+<ul>
+<li><a href="mailto:careers@hotbeansweb.co.uk">careers@hotbeansweb.co.uk</a></li>
+<li><a href="tel:+441234567890">+44 (0)1234 567 890</a></li>
+<li><a href="#">LinkedIn</a></li>
+<li><a href="#">GitHub</a></li>
+<li><a href="#">Twitter / X</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Hot Beans Web Ltd. All rights reserved.</span>
+<span>Registered in England & Wales · Privacy Policy · Cookie Policy</span>
+</div>
+</div>
+</footer>
+<script>
+ function toggleMenu() {
+   document.getElementById('mobileMenu').classList.toggle('open');
+ }
+ const observer = new IntersectionObserver((entries) => {
+   entries.forEach(e => {
+     if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+   });
+ }, { threshold: 0.12 });
+ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+ const sections = document.querySelectorAll('section[id]');
+ const navLinks = document.querySelectorAll('.nav-links a');
+ window.addEventListener('scroll', () => {
+   let current = '';
+   sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id'); });
+   navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--bean)' : ''; });
+ });
+ function submitForm() {
+   const fields = ['firstName','lastName','email','role','qualification','experience','skills','coverLetter'];
+   const gdpr = document.getElementById('gdpr');
+   let valid = true;
+   fields.forEach(id => {
+     const el = document.getElementById(id);
+     if (!el.value.trim()) { el.style.borderColor = '#f87171'; valid = false; }
+     else { el.style.borderColor = ''; }
+   });
+   if (!gdpr.checked) { gdpr.style.outline = '2px solid #f87171'; valid = false; }
+   else { gdpr.style.outline = ''; }
+   const emailEl = document.getElementById('email');
+   if (emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+     emailEl.style.borderColor = '#f87171'; valid = false;
+   }
+   if (!valid) {
+     const firstErr = document.querySelector('[style*="f87171"]');
+     if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+     return;
+   }
+   document.getElementById('applicationForm').style.display = 'none';
+   const msg = document.getElementById('successMsg');
+   msg.style.display = 'block';
+   msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+ }
+</script>
+</body>
+</html>
